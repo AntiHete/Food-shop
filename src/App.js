@@ -382,6 +382,7 @@ class App extends React.Component {
     this.chooseCategory = this.chooseCategory.bind(this) // Прив'язка контексту для функції вибору категорії
     this.onShowItem = this.onShowItem.bind(this) // Прив'язка контексту для функції відображення елементу
     this.searchItems = this.searchItems.bind(this) // Прив'язка контексту для функції пошуку елементів
+    this.updateOrderQuantity = this.updateOrderQuantity.bind(this) // Прив'язка контексту для функції оновлення кількості товару
   }
   
   componentDidMount() {
@@ -429,20 +430,52 @@ class App extends React.Component {
     })
   }
 
+  // Функція оновлення кількості товару
+  updateOrderQuantity(id, newQuantity) {
+    this.setState({
+        orders: this.state.orders.map(order => {
+            if (order.id === id) {
+                return { ...order, quantity: newQuantity }; // Обновляем количество
+            }
+            return order;
+        })
+    });
+}
+
   // Функція видалення замовлення
   deleteOrder(id) {
-    this.setState({orders: this.state.orders.filter(el => el.id !== id)})
+    this.setState({ orders: this.state.orders.filter(el => el.id !== id) })
   }
 
   // Функція додавання до замовлення
   addToOrder(item) {
-    let isInArray = false
+    let isInArray = false;
     this.state.orders.forEach(el => {
-      if(el.id === item.id)
-        isInArray = true
-    })
-    if(!isInArray)
-      this.setState({orders: [...this.state.orders, item] })
+      if (el.id === item.id) {
+        isInArray = true;
+      }
+    });
+
+    if (!isInArray) {
+      this.setState({ orders: [...this.state.orders, { ...item, quantity: 1 }] });
+    }
+  }
+
+  render() {
+    return (
+      <div className="wrapper">
+        <Header
+          orders={this.state.orders}
+          onDelete={this.deleteOrder}
+          updateQuantity={this.updateOrderQuantity} // Передаємо функцію оновлення кількості
+          searchItems={this.searchItems}
+        />
+        <Categories chooseCategory={this.chooseCategory} />
+        <Items onShowItem={this.onShowItem} items={this.state.currentItems} onAdd={this.addToOrder} />
+        {this.state.showFullItem && <ShowFullItem onAdd={this.addToOrder} onShowItem={this.onShowItem} item={this.state.fullItem} />}
+        <Footer />
+      </div>
+    );
   }
 }
 

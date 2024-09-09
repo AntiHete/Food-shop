@@ -17,15 +17,20 @@ export default function Header(props) {
 
     // Функція для відображення замовлень
     const showOrders = () => {
-        let summa = 0; // Змінна для обчислення загальної суми замовлення
-        props.orders.forEach(el => summa += Number.parseFloat(el.price)); // Обчислюємо загальну суму
+        let summa = 0;
+        props.orders.forEach(el => summa += Number.parseFloat(el.price) * (el.quantity || 1));
         return (
             <div>
                 {props.orders.map(el => (
-                    <Order onDelete={props.onDelete} key={el.id} item={el} />
+                    <Order
+                        onDelete={props.onDelete}
+                        key={el.id}
+                        item={el}
+                        updateQuantity={props.updateQuantity} // Убедитесь, что передаете функцию правильно
+                    />
                 ))}
-                <p className='summa'>Сума: {new Intl.NumberFormat().format(summa)}UAH</p>
-                <button onClick={() => setCheckoutOpen(true)}>Оформити замовлення</button>
+                <p className='summa'>Сумма: {new Intl.NumberFormat().format(summa)} UAH</p>
+                <button className='checkout-button' onClick={() => setCheckoutOpen(prev => !prev)}>Оформить заказ</button>
             </div>
         );
     };
@@ -59,7 +64,7 @@ export default function Header(props) {
                 </CSSTransition>
                 {/* Відображаємо пункт меню для оформлення замовлення */}
                 <ul className='nav'>
-                    <li onClick={() => setCheckoutOpen(true)}>Оформлення замовлення</li>
+                    <li onClick={() => setCheckoutOpen(prev => !prev)}>Оформлення замовлення</li>
                 </ul>
                 {/* Відображаємо іконку корзини, яка відкриває/закриває корзину */}
                 <FaShoppingCart onClick={() => setCartOpen(!cartOpen)} className={`shop-cart-button ${cartOpen && 'active'}`} />
@@ -73,7 +78,12 @@ export default function Header(props) {
                 )}
 
                 {/* Відображаємо форму замовлення, якщо вона відкрита */}
-                {checkoutOpen && (
+                <CSSTransition
+                    in={checkoutOpen}
+                    timeout={300}
+                    classNames="slide-up"
+                    unmountOnExit
+                >
                     <div className="checkout-form">
                         <h3>Форма оформлення замовлення</h3>
                         {/* Використовуємо компонент OrderForm для відображення форми */}
@@ -82,7 +92,7 @@ export default function Header(props) {
                             setCheckoutOpen(false); // Закриваємо форму після її відправки
                         }} />
                     </div>
-                )}
+                </CSSTransition>
             </div>
             <div className='presentation'></div>
         </header>

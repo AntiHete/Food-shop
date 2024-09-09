@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios'; // Імпортуємо бібліотеку Axios для взаємодії з сервером
 
 export default function OrderForm({ onSubmit }) {
@@ -38,6 +38,20 @@ export default function OrderForm({ onSubmit }) {
         }
     };    
 
+    // Зберігаємо дані форми в localStorage при закритті
+    useEffect(() => {
+        // Зберігаємо дані форми при зміні
+        localStorage.setItem('orderFormData', JSON.stringify(formData));
+    }, [formData]);
+
+    // Відновлюємо дані форми з localStorage при завантаженні
+    useEffect(() => {
+        const savedData = localStorage.getItem('orderFormData');
+        if (savedData) {
+            setFormData(JSON.parse(savedData));
+        }
+    }, []);
+
     return (
         <form onSubmit={handleSubmit}>
             <div>
@@ -62,7 +76,7 @@ export default function OrderForm({ onSubmit }) {
                     required
                 /> 
             </div>
-            <div>
+            <div style={{ display: formData.deliveryMethod === 'pickup' ? 'none' : 'block' }}>
                 <label htmlFor="address">Адреса доставки:</label>
                 <input
                     type="text"

@@ -1,10 +1,13 @@
+/* Імпорт шрифту Montserrat з різними товщинами */
 @import url('https://fonts.googleapis.com/css?family=Montserrat:wght@300;600&display=swap');
 
+/* Скидання відступів і паддингів для всіх елементів */
 * {
     margin: 0;
     padding: 0;
 }
 
+/* Основні стилі для body */
 body {
     background: #fff;
     color: #222;
@@ -12,90 +15,102 @@ body {
     font-weight: 300;
 }
 
+/* Обгортка для центрування вмісту */
 .wrapper {
     width: 1280px;
     margin: 50px auto;
 }
 
+/* Стилі для header */
 header {
     position: relative;
 }
 
+/* Логотип в header */
 header .logo {
     font-weight: 600;
     font-size: 20px;
 }
 
+/* Навігаційне меню в header */
 header ul.nav {
     float: right;
     list-style: none;
 }
 
-header ul.nav li{
+/* Елементи навігаційного меню */
+header ul.nav li {
     display: inline;
     margin-left: 25px;
     cursor: pointer;
     transition: opacity 500ms ease;
 }
 
+/* Елементи меню при наведенні */
 header ul.nav li:hover {
     opacity: 0.5;
 }
 
+/* Кнопка корзини в header */
 header .shop-cart-button {
     float: right;
     cursor: pointer;
     transition: color, transform 500ms ease;
 }
 
+/* Стилі для кнопки корзини при наведенні та активному стані */
 header .shop-cart-button:hover,
 header .shop-cart-button.active {
     color: #dc3d3d;
     transform: scale(1.5);
 }
 
+/* Корзина в header */
 header .shop-cart {
     position: absolute;
     top: 30px;
     right: 0;
     width: 450px;
     background: #fafafa;
-    -webkit-box-shadow: 4px 5px 15px -7px #606060;
     box-shadow: 4px 5px 15px -7px #606060;
     z-index: 1000;
-
     padding: 20px;
     padding-bottom: 0;
 }
 
+/* Порожня корзина */
 header .shop-cart .empty h2 {
     font-size: 20px;
     margin-bottom: 20px;
 }
 
+/* Елементи в корзині */
 header .shop-cart .item {
     width: 100%;
     float: left;
     margin-bottom: 20px;
-    
 }
 
+/* Зображення елемента в корзині */
 header .shop-cart .item img {
     width: 70px;
     float: left;
     margin-right: 20px;
 }
 
+/* Заголовок елемента в корзині */
 header .shop-cart .item h2 {
     font-size: 20px;
     margin-bottom: 10px;
 }
 
+/* Опис елемента в корзині */
 header .shop-cart .item p {
     color: #797979;
     font-weight: 600;
 }
 
+/* Іконка видалення елемента з корзини */
 header .shop-cart .item .delete-icon {
     color: #ca5252;
     float: right;
@@ -105,11 +120,13 @@ header .shop-cart .item .delete-icon {
     transition: color, transform 500ms ease;
 }
 
+/* Іконка видалення при наведенні */
 header .shop-cart .item .delete-icon:hover {
     color: #d83030;
     transform: scale(1.5);
 }
 
+/* Підсумкова сума в корзині */
 header .shop-cart .summa {
     float: left;
     width: 100%;
@@ -118,6 +135,7 @@ header .shop-cart .summa {
     margin-bottom: 20px;
 }
 
+/* Блок презентації в header */
 header .presentation {
     margin: 50px 0;
     background: url('./img/bg.jpeg') no-repeat;
@@ -130,6 +148,7 @@ header .presentation {
     position: relative;
 }
 
+/* Текст на фоні презентації */
 header .presentation::after {
     content: 'Найкращі товари для вашого настрою';
     position: absolute;
@@ -141,6 +160,7 @@ header .presentation::after {
     color: #fff;
 }
 
+/* Додатковий текст на фоні презентації */
 header .presentation::before {
     content: 'за низькими цінами';
     position: absolute;
@@ -152,6 +172,7 @@ header .presentation::before {
     color: #fff;
 }
 
+/* Стилі для категорій */
 .categories div {
     display: inline-block;
     background: #f2f2f2;
@@ -164,11 +185,13 @@ header .presentation::before {
     transition: all 500ms ease;
 }
 
+/* Елементи категорій при наведенні */
 .categories div:hover {
     border-color: silver;
-    transition: scale(1.1);
+    transform: scale(1.1);
 }
 
+/* Стилі для поля пошуку */
 .search-input {
     border: 1px solid #ccc;
     border-radius: 5px;
@@ -176,89 +199,187 @@ header .presentation::before {
     padding: 8px 12px;
     transition: all 0.3s ease;
 }
-  
+
+/* Логотип на сторінці пошуку */
 .logo {
     margin-right: 15px;
 }
 
+/* Стилі для фокусу на поле пошуку */
 .search-input:focus {
     outline: none;
     border-color: blue;
 }
-  
+
+/* Анімація появи елементів при вході */
 .slide-up-enter {
     transform: translateY(-100%);
     opacity: 0;
 }
-  
+
 .slide-up-enter-active {
     transform: translateY(0);
     opacity: 1;
     transition: all 0.3s ease;
 }
 
-.checkout-form {
-    background-color: #f9f9f9;
-    border: 1px solid #ddd;
-    padding: 20px;
-    margin-top: 20px;
-  }
-  
-  .checkout-form h3 {
-    margin-bottom: 10px;
-  }
-  
-  .checkout-form label {
-    display: block;
-    margin-bottom: 5px;
-  }
-  
-  .checkout-form input[type="text"],
-  .checkout-form select {
-    width: 100%;
-    padding: 8px;
-    margin-bottom: 10px;
-    border: 1px solid #ccc;
-    border-radius: 4px;
-    box-sizing: border-box;
-  }
-  
-  .checkout-form button {
+/* Стилі для кнопки "Оформити замовлення" */
+.checkout-button {
     background-color: #4caf50;
     color: white;
     padding: 10px 20px;
     border: none;
     border-radius: 4px;
     cursor: pointer;
-  }
-  
-  .checkout-form button:hover {
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Стилі для кнопки "Оформити замовлення" при наведенні */
+.checkout-button:hover {
     background-color: #45a049;
-  }
-  
-  /* Додаткові стилі для інших елементів у хедері */
-  .logo {
+}
+
+/* Стилі для кнопки "Оформити замовлення" при натисканні */
+.checkout-button:active {
+    transform: scale(0.98);
+}
+
+/* Стилі для форми оформлення замовлення */
+.checkout-form {
+    background-color: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin-top: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Заголовок форми оформлення замовлення */
+.checkout-form h3 {
+    margin-bottom: 20px;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+/* Стилі для міток у формі замовлення */
+.checkout-form label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+}
+
+/* Стилі для полів вводу у формі оформлення замовлення */
+.checkout-form input[type="text"],
+.checkout-form select {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Додаткові стилі для поля електронної пошти */
+.checkout-form input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+
+/* Стилі для кнопок у формі оформлення замовлення */
+.checkout-form button {
+    background-color: #4caf50;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Стилі для кнопок у формі оформлення замовлення при наведенні */
+.checkout-form button:hover {
+    background-color: #45a049;
+}
+
+/* Стилі для кнопок у формі оформлення замовлення при натисканні */
+.checkout-form button:active {
+    transform: scale(0.98);
+}
+
+/* Стилі для кнопок управління кількістю товарів */
+.quantity-control {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* Відступ між кнопками і кількістю */
+}
+
+/* Кнопки управління кількістю товарів */
+.quantity-btn {
+    background-color: #f0f0f0;
+    border: 1px solid #ddd;
+    color: #333;
+    border-radius: 50%; /* Кругла форма кнопок */
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 18px;
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.1s;
+}
+
+/* Кнопка управління кількістю товарів при наведенні */
+.quantity-btn:hover {
+    background-color: #ddd; /* Колір кнопки при наведенні */
+}
+
+/* Кнопка управління кількістю товарів при натисканні */
+.quantity-btn:active {
+    transform: scale(0.9); /* Легке зменшення при натисканні */
+}
+
+/* Стилі для відображення кількості товарів */
+.quantity {
+    font-size: 18px;
+    padding: 0 10px;
+    min-width: 20px;
+    text-align: center;
+}
+
+/* Додаткові стилі для логотипу */
+.logo {
     font-size: 24px;
     font-weight: bold;
-  }
-  
-  .nav {
+}
+
+/* Стилі для навігаційного меню в header */
+.nav {
     list-style-type: none;
     padding: 0;
-  }
-  
-  .nav li {
+}
+
+/* Елементи навігаційного меню */
+.nav li {
     display: inline;
     margin-right: 20px;
     cursor: pointer;
-  }
-  
-  .shop-cart-button {
+}
+
+/* Стилі для кнопки корзини */
+.shop-cart-button {
     font-size: 24px;
     cursor: pointer;
-  }
-  
-  .shop-cart {
+}
+
+/* Корзина в header */
+.shop-cart {
     position: absolute;
     top: 100%;
     right: 0;
@@ -266,17 +387,20 @@ header .presentation::before {
     border: 1px solid #ddd;
     padding: 10px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  .shop-cart .summa {
+}
+
+/* Підсумкова сума в корзині */
+.shop-cart .summa {
     font-weight: bold;
-  }
-  
-  .empty {
+}
+
+/* Порожня корзина */
+.empty {
     text-align: center;
     margin-top: 20px;
-  }
+}
 
+/* Повноекранний модальний блок */
 .full-item {
     position: fixed;
     top: 0;
@@ -288,7 +412,8 @@ header .presentation::before {
     overflow: auto;
 }
 
-.full-item>div {
+/* Вміст модального блоку */
+.full-item > div {
     width: 600px;
     position: relative;
     margin: 10% auto;
@@ -297,6 +422,7 @@ header .presentation::before {
     border-radius: 9px;
 }
 
+/* Основні стилі для основного контенту */
 main {
     display: flex;
     width: 100%;
@@ -304,6 +430,7 @@ main {
     justify-content: space-between;
 }
 
+/* Стилі для елементів у основному контенті */
 main .item {
     width: 30%;
     margin-bottom: 50px;
@@ -313,6 +440,7 @@ main .item {
     padding-bottom: 20px;
 }
 
+/* Зображення в основному контенті та модальному блоці */
 main .item img, 
 .full-item img {
     width: 100%;
@@ -321,21 +449,25 @@ main .item img,
     cursor: pointer;
 }
 
+/* Зображення при наведенні */
 main .item img:hover, .full-item img:hover {
     transform: scale(1.05);
 }
 
+/* Стилі для заголовків і тексту в основному контенті та модальному блоці */
 main h2, .full-item h2,
 main p, .full-item p,
 main b, .full-item b {
     margin: 10px 20px;
     color: #333;
-} 
+}
 
+/* Стилі для жирного тексту в основному контенті та модальному блоці */
 main b, .full-item b {
     color: #5fa36a;
 }
 
+/* Кнопка "Додати в кошик" */
 main .add-to-cart,
 .full-item .add-to-cart {
     position: absolute;
@@ -353,11 +485,13 @@ main .add-to-cart,
     transition: transform 500ms ease;
 }
 
+/* Кнопка "Додати в кошик" при наведенні */
 main .add-to-cart:hover,
 .full-item .add-to-cart:hover {
     transform: scale(1.5) translateY(-5px);
 }
 
+/* Стилі для футера */
 footer {
     text-align: center;
     margin-top: 100px;
