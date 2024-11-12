@@ -10,18 +10,45 @@ export default function OrderForm({ onSubmit }) {
         paymentMethod: ''
     });
 
+    const [emailError, setEmailError] = useState(''); // Стан для зберігання повідомлення про помилку
+
+    // Функція для валідації електронної пошти
+    const validateEmail = (email) => {
+        // Регулярний вираз для перевірки формату електронної пошти
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        return emailRegex.test(email); // Повертає true, якщо формат коректний
+    };
+
     // Функція, яка викликається при зміні будь-якого поля форми
     const handleChange = (event) => {
         const { name, value } = event.target;
+        
+        // Оновлюємо стан з даними форми
         setFormData({
             ...formData,
             [name]: value
         });
+
+        // Перевіряємо електронну пошту на коректність формату
+        if (name === 'email') {
+            if (!validateEmail(value)) {
+                setEmailError('Некоректний формат електронної пошти'); // Встановлюємо повідомлення про помилку
+            } else {
+                setEmailError(''); // Очищаємо повідомлення про помилку, якщо формат правильний
+            }
+        }
     };
 
     // Функція, яка викликається при надсиланні форми
     const handleSubmit = async (event) => {
         event.preventDefault();
+
+        // Перевіряємо чи електронна пошта коректна перед надсиланням форми
+        if (!validateEmail(formData.email)) {
+            setEmailError('Некоректний формат електронної пошти');
+            return;
+        }
+
         console.log('Form data submitted:', formData); // Виводимо дані форми в консоль перед надсиланням
         if (!onSubmit) {
             console.error('Error: onSubmit function is not provided.'); // Перевіряємо, чи передана функція onSubmit
@@ -36,7 +63,7 @@ export default function OrderForm({ onSubmit }) {
         } catch (error) {
             console.error('Error submitting form:', error);
         }
-    };    
+    };
 
     // Зберігаємо дані форми в localStorage при закритті
     useEffect(() => {
@@ -74,7 +101,8 @@ export default function OrderForm({ onSubmit }) {
                     value={formData.email}
                     onChange={handleChange}
                     required
-                /> 
+                />
+                {emailError && <p style={{ color: 'red' }}>{emailError}</p>} {/* Виведення помилки, якщо формат некоректний */}
             </div>
             <div style={{ display: formData.deliveryMethod === 'pickup' ? 'none' : 'block' }}>
                 <label htmlFor="address">Адреса доставки:</label>
